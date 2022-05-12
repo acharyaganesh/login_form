@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Login form</title>
+</head>
+<script>
+    <?php
+$host='localhost';
+$user='root';
+$pass='';
+$dbname='mydatas';
+$conn=mysqli_connect($host,$user,$pass,$dbname);
+if(!$conn)
+{
+	die('could not connect'.mysqli_error());
+}
+echo "connection successful...";
+
+if(empty($_POST['nm']))
+{
+	$err="name is required";
+	echo $err;
+}
+$name=$_POST['nm'];
+$pass=$_POST['pswd'];
+$sql="INSERT INTO USER(Uname,Upass) values('$name','$pass')";
+if($conn->query($sql)===TRUE)
+{
+	echo "new record created successfully....";
+}
+else
+{
+	echo "Error".$sql.$conn->error;
+}
+
+</script>
+<body>
+    
+    <div class="center">
+        <h1>Login Form </h1>
+        <form action="gallery.html" method="post">
+            <div class="text-field">
+                <input type="text" required>
+                <span></span>
+                <label>Username</label>
+            </div>
+            <div class="text-field">
+                <input type="password" required>
+                <span></span>
+                <label>Password</label>
+            </div>
+            <div class="pass"> <a href="#"> Forget password?</a></div>
+            <input type="Submit" name="submit" value="Login">
+            <div class="signup_link">
+                Create a account<a href="signup.html">Sign up</a>
+            </div>
+        </form>
+    </div>
+
+    
+</body>
+</html>
